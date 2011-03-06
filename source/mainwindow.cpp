@@ -2,6 +2,8 @@
 #include "ui_mainwindow.h"
 #include "QDebug"
 #include "QMouseEvent"
+#include "paintserver.h"
+
 MainWindow::MainWindow(QWidget *parent) :
     QMainWindow(parent),
     ui(new Ui::MainWindow)
@@ -12,6 +14,8 @@ MainWindow::MainWindow(QWidget *parent) :
     connect(ui->hSliderRed,SIGNAL(valueChanged(int)),this,SLOT(showColor()));
     connect(ui->hSliderBlue,SIGNAL(valueChanged(int)),this,SLOT(showColor()));
     connect(ui->hSliderGreen,SIGNAL(valueChanged(int)),this,SLOT(showColor()));
+
+    connect(&PaintServer::instance(), SIGNAL(notifyObservers()), this, SLOT(updateColors()));
 }
 
 MainWindow::~MainWindow()
@@ -20,24 +24,25 @@ MainWindow::~MainWindow()
 }
 void MainWindow::showColor()
 {
-    paintcolor = QColor( ui->hSliderRed->value(),
-                         ui->hSliderGreen->value(),
-                         ui->hSliderBlue->value(),
-                         ui->hSliderAlpha->value() );
+    QColor color = QColor( ui->hSliderRed->value(),
+                           ui->hSliderGreen->value(),
+                           ui->hSliderBlue->value(),
+                           ui->hSliderAlpha->value() );
 
-    // Update preview widget with new color
-    ui->label_colorPre->setPalette(QPalette(QPalette::Background, paintcolor));
-
-    setHtlmColor(paintcolor);
+    PaintServer::instance().setColor(color);
 }
 
-void MainWindow::setHtlmColor(QColor bgcolor)
+void MainWindow::updateColors()
 {
+    QColor color = PaintServer::instance().color();
+    // Update preview widget with new color
+    ui->label_colorPre->setPalette(QPalette(QPalette::Background, color));
+
     QString htmlcolor;
     htmlcolor.append("#");
-    htmlcolor.append(QString::number(bgcolor.red(),16).rightJustified(2,48,false));
-    htmlcolor.append(QString::number(bgcolor.green(),16).rightJustified(2,48,false));
-    htmlcolor.append(QString::number(bgcolor.blue(),16).rightJustified(2,48,false));
+    htmlcolor.append(QString::number(color.red(),16).rightJustified(2,48,false));
+    htmlcolor.append(QString::number(color.green(),16).rightJustified(2,48,false));
+    htmlcolor.append(QString::number(color.blue(),16).rightJustified(2,48,false));
     ui->lineEditHtmlColor->setText(htmlcolor);
     //bgcolor.red();
 }

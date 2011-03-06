@@ -14,15 +14,13 @@ class MainWindow : public QMainWindow
 public:
     explicit MainWindow(QWidget *parent = 0);
     ~MainWindow();
-    QColor paintcolor;
 
 protected slots:
     void showColor();
+    void updateColors();
 
 private:
-    void setHtlmColor(QColor bgcolor);
     Ui::MainWindow *ui;
-
 };
 
 #endif // MAINWINDOW_H

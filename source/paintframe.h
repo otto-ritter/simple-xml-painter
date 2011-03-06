@@ -16,8 +16,10 @@ signals:
 
 public slots:
     void mousePressEvent(QMouseEvent *event);
+
 private:
-    int x,y,mButton;
+    int lastClick[2];
+    int currentClick[2];
 };
 
 #endif // PAINTFRAME_H
