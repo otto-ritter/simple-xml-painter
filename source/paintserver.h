@@ -3,6 +3,7 @@
 
 #include <QObject>
 #include <QColor>
+#include "vectorimage.h"
 
 class PaintServer : public QObject
 {
@@ -13,6 +14,8 @@ public:
     void setColor(QColor color);
     QColor color();
 
+    VectorImage& currentImage();
+
 signals:
     void notifyObservers();
 
@@ -21,6 +24,7 @@ private:
     ~PaintServer();
 
     QColor m_color;
+    VectorImage m_vectorImage;
 };
 
 #endif // PAINT_SERVER_H

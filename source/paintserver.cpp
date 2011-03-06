@@ -24,3 +24,8 @@ QColor PaintServer::color()
 {
     return m_color;
 }
+
+VectorImage& PaintServer::currentImage()
+{
+    return m_vectorImage;
+}

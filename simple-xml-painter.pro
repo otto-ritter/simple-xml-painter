@@ -13,13 +13,13 @@ INCLUDEPATH += source
 SOURCES += source/main.cpp\
            source/mainwindow.cpp \
            source/myxmlhandler.cpp \
-           source/mypainter.cpp \
+           source/vectorimage.cpp \
            source/paintframe.cpp \
            source/paintserver.cpp
 
 HEADERS += source/mainwindow.h \
            source/myxmlhandler.h \
-           source/mypainter.h \
+           source/vectorimage.h \
            source/paintframe.h \
            source/paintserver.h
 
