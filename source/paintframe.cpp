@@ -21,11 +21,13 @@ void paintFrame::mousePressEvent(QMouseEvent *event)
 
         currentClick[0] = event->x();
         currentClick[1] = event->y();
-        line->points[0].setX(lastClick[0]);
 
+        line->points[0].setX(lastClick[0]);
         line->points[0].setY(lastClick[1]);
         line->points[1].setX(currentClick[0]);
         line->points[1].setY(currentClick[1]);
+        line->strokeWidth = 1;
+        line->color = PaintServer::instance().color();
 
         PaintServer::instance().vectorImage().addElement(line);
         break;
@@ -46,7 +48,7 @@ void paintFrame::paintEvent(QPaintEvent *)
        {
        case Element::Line:
            Line* line = dynamic_cast<Line*>(element);
-           painter.setPen(QPen(PaintServer::instance().color(), line->strokeWidth));
+           painter.setPen(QPen(line->color, line->strokeWidth));
            painter.drawLine(line->points[0], line->points[1]);
            break;
        }
