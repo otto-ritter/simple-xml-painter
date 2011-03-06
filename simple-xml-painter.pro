@@ -9,7 +9,7 @@ QT       += core gui xml
 TARGET = simple-xml-drawer
 TEMPLATE = app
 DESTDIR = .
-
+INCLUDEPATH += source
 SOURCES += source/main.cpp\
            source/mainwindow.cpp \
            source/myxmlhandler.cpp \
