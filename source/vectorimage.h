@@ -25,16 +25,18 @@ public:
     QColor color;
 };
 
-class VectorImage
+class VectorImage : public QObject
 {
+    Q_OBJECT
 public:
     VectorImage();
     ~VectorImage();
     void clear();
-    void addElement(Element* element)
-    {
-        m_elements.push_back(element);
-    }
+    void addElement(Element* element);
+    QList<Element*> elements();
+
+signals:
+    void changed();
 
 private:
     QList<Element*> m_elements;

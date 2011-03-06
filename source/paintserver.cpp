@@ -8,6 +8,7 @@ PaintServer& PaintServer::instance()
 
 PaintServer::PaintServer()
 {
+    connect(&m_vectorImage, SIGNAL(changed()), this, SLOT(reportChanges()));
 }
 
 PaintServer::~PaintServer()
@@ -25,7 +26,12 @@ QColor PaintServer::color()
     return m_color;
 }
 
-VectorImage& PaintServer::currentImage()
+VectorImage& PaintServer::vectorImage()
 {
     return m_vectorImage;
+}
+
+void PaintServer::reportChanges()
+{
+    emit notifyObservers();
 }

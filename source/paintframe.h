@@ -16,6 +16,7 @@ signals:
 
 public slots:
     void mousePressEvent(QMouseEvent *event);
+    void updateImage();
 
 private:
     int lastClick[2];

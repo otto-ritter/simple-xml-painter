@@ -14,7 +14,10 @@ public:
     void setColor(QColor color);
     QColor color();
 
-    VectorImage& currentImage();
+    VectorImage& vectorImage();
+
+public slots:
+    void reportChanges();
 
 signals:
     void notifyObservers();
