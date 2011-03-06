@@ -15,12 +15,12 @@ public:
     explicit MainWindow(QWidget *parent = 0);
     ~MainWindow();
     QColor paintcolor;
+
 protected slots:
-    void moveColorSlider();
+    void showColor();
+
 private:
     void setHtlmColor(QColor bgcolor);
-    void setColorPreview(QColor bgcolor);
-    ;
     Ui::MainWindow *ui;
 
 };

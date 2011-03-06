@@ -16,9 +16,9 @@ void paintFrame::mousePressEvent(QMouseEvent *event)
 }
  void paintFrame::paintEvent(QPaintEvent *)
  {
-     QPainter painter(this);
-     painter.setPen(QPen(Qt::green,3));
-     painter.begin(this);
+    QPainter painter(this);
+    painter.setPen(QPen(Qt::green,3));
+
     painter.drawLine(x,y,x+10,y+20);
-   // painter.end();
+    painter.end();
  }

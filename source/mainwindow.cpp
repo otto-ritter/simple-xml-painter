@@ -7,30 +7,30 @@ MainWindow::MainWindow(QWidget *parent) :
     ui(new Ui::MainWindow)
 {
     ui->setupUi(this);
-    moveColorSlider();
-    connect(ui->hSliderAlpha,SIGNAL(sliderReleased()),this,SLOT(moveColorSlider()));
-    connect(ui->hSliderRed,SIGNAL(sliderReleased()),this,SLOT(moveColorSlider()));
-    connect(ui->hSliderBlue,SIGNAL(sliderReleased()),this,SLOT(moveColorSlider()));
-    connect(ui->hSliderGreen,SIGNAL(sliderReleased()),this,SLOT(moveColorSlider()));
+    showColor();
+    connect(ui->hSliderAlpha,SIGNAL(valueChanged(int)),this,SLOT(showColor()));
+    connect(ui->hSliderRed,SIGNAL(valueChanged(int)),this,SLOT(showColor()));
+    connect(ui->hSliderBlue,SIGNAL(valueChanged(int)),this,SLOT(showColor()));
+    connect(ui->hSliderGreen,SIGNAL(valueChanged(int)),this,SLOT(showColor()));
 }
 
 MainWindow::~MainWindow()
 {
     delete ui;
 }
-void MainWindow::moveColorSlider()
+void MainWindow::showColor()
 {
-    paintcolor=QColor(ui->hSliderRed->value(),ui->hSliderGreen->value(),ui->hSliderBlue->value(),ui->hSliderAlpha->value());
-    setColorPreview(paintcolor);
+    paintcolor = QColor( ui->hSliderRed->value(),
+                         ui->hSliderGreen->value(),
+                         ui->hSliderBlue->value(),
+                         ui->hSliderAlpha->value() );
+
+    // Update preview widget with new color
+    ui->label_colorPre->setPalette(QPalette(QPalette::Background, paintcolor));
+
     setHtlmColor(paintcolor);
 }
-void MainWindow::setColorPreview(QColor bgcolor)
-{
-    QPalette palette;
-    palette.setColor(QPalette::Background,bgcolor);
-    // Palette setzen
-    ui->label_colorPre->setPalette(palette);
-}
+
 void MainWindow::setHtlmColor(QColor bgcolor)
 {
     QString htmlcolor;
